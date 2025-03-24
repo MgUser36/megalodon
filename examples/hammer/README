@@ -6,7 +6,7 @@ megalodon 100thms_12_h.mg
 There are 3401 proofs that claim to be done by the "aby" tactic.
 Creating ATP problem files corresponding to the "aby" calls can be done as follows:
 
-megalodon -createhammerprobs hammer 100thms_12_h.mg
+megalodon -createabyprobs hammer 100thms_12_h.mg
 
 This will create 3401 th0 files with names
 
