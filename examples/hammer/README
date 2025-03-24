@@ -29,7 +29,7 @@ vampire_rel_static_forIsabelle_6878 --input-syntax tptp --mode portfolio --sched
 Vampire called as follows:
 vampire_rel_static_forIsabelle_6878 --input-syntax tptp --mode portfolio --schedule snake_tptp_hol -t 60 <th0file>
 
-Zipperposition ? called as follows:
+Zipperposition called as follows:
 run_portfolio_coop <th0file> 60 1 ../tmp
 
 E (3.1.0-ho) called as follows:
