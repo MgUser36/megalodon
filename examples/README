@@ -1,0 +1,17 @@
+* Formalizing 100 Theorems
+
+The subdirectory form100 contains a Megalodon presentation of
+12 of the 100 theorems listed here:
+
+http://www.cs.ru.nl/~freek/100/
+
+To check the presentation do this:
+
+megalodon form100/100thms_12.mg
+
+* Hammer
+
+A version of the file 100thms_12.mg using ATPs as a hammer is hammer/100thms_12_h.mg
+
+See hammer/README for more information.
+
