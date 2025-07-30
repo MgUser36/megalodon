@@ -212,6 +212,51 @@ INSERT-POS."
 		    (list problem-path)))
      #'mg-hammer-sentinel)))
 
+
+(defvar mg-proof-keywords
+  '("Definition" "Axiom" "Parameter" "Section" "Infix" "Notation" "Binder+"
+    "Let" "Prefix" "Postfix" "Variable" "End" "Unicode" "Theorem" "Lemma" "Proof" "Qed"
+    "rewrite" "prove" "let" "assume"
+    "apply" "claim" "exact" "symmetry" "witness" "aby")
+  "Additional keywords to highlight in mg proof mode.")
+
+;; (defvar mg-proof-font-lock-keywords
+;;   `((,(regexp-opt mg-proof-keywords 'symbols) . font-lock-keyword-face))
+;;   "Font lock rules for mg proof mode.")
+
+
+;; (defvar mg-proof-font-lock-keywords
+;;   `(
+;;     ;; Comments: (** ... **)
+;;     ("(\\*\\*\\(\\(.\\|\n\\)*?\\)\\*\\*)" . font-lock-comment-face)
+;;     ;; Keywords
+;;     (,(regexp-opt mg-proof-keywords 'symbols) . font-lock-keyword-face)
+;;     )
+;;   "Font-lock keywords for mg-mode.")
+
+;; (defvar mg-proof-font-lock-keywords
+;;   `(
+;;     ;; Match multiline (** ... **) comments
+;;     ("(\\*\\*\\(.\\|\n\\)*?\\*\\*)" . font-lock-comment-face)
+;;     ;; Keywords
+;;     (,(regexp-opt mg-proof-keywords 'symbols) . font-lock-keyword-face)
+;;     )
+;;   "Font lock rules for mg proof mode.")
+
+;; Tell font-lock the comment rule spans lines
+(defun mg-fontify-multiline-comments (limit)
+  (when (re-search-forward "(\\*\\*\\(.\\|\n\\)*?\\*\\*)" limit t)
+    (put-text-property (match-beginning 0) (match-end 0) 'font-lock-multiline t)
+    (setq font-lock-multiline t)
+    t))
+
+(defvar mg-proof-font-lock-keywords
+  `(
+    (mg-fontify-multiline-comments . font-lock-comment-face)
+    (,(regexp-opt mg-proof-keywords 'symbols) . font-lock-keyword-face))
+  "Font lock rules for mg proof mode.")
+
+
 (defcustom mg-mode-hook nil
   "A hook for mg mode."
   :type 'hook
@@ -226,20 +271,18 @@ Entry to this mode calls the value of `mg-mode-hook'
 if that value is non-nil."
   (interactive "P")
   (kill-all-local-variables)
+;  (set-syntax-table mg-mode-syntax-table)
   (use-local-map mg-mode-map)
   (setq major-mode 'mg-mode)
   (setq mode-name "Mg")
 ;  (setq local-abbrev-table mg-mode-abbrev-table)
 ;  (mg-mode-variables)
+  (set (make-local-variable 'font-lock-defaults)
+       '(mg-proof-font-lock-keywords))
+  (setq-local comment-start "(** ")
+  (setq-local comment-end " **)")  
   (setq buffer-offer-save t)
-;  (mg-setup-imenu-sb)
-;  (if (buffer-abstract-p (current-buffer))
-;      (mg-set-item-overlays-in-abstract))
-;  (if (and mg-abstracts-use-view
-;	   (buffer-abstract-p (current-buffer)))
-;      (view-mode))
-;  (add-to-list 'fontification-functions 'mg-underline-cexpls)
-;  (make-local-variable 'font-lock-fontify-region-function)
+  (turn-on-font-lock)
   (run-hooks 'mg-mode-hook)
   )
 
