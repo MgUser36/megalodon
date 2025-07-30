@@ -214,10 +214,19 @@ INSERT-POS."
 
 
 (defvar mg-proof-keywords
-  '("Definition" "Axiom" "Parameter" "Section" "Infix" "Notation" "Binder+"
-    "Let" "Prefix" "Postfix" "Variable" "End" "Unicode" "Theorem" "Lemma" "Proof" "Qed"
-    "rewrite" "prove" "let" "assume"
-    "apply" "claim" "exact" "symmetry" "witness" "aby")
+  '("Definition" "Axiom" "Parameter" "Section" "Infix" "Notation" "Binder" "Binder+"
+    "Let" "Prefix" "Postfix" "Variable" "End"
+    "Unicode" "Subscript" "Superscript" "ShowProofTerms" "HideProofTerms" "Verbose" "Salt"
+    "Opaque" "Transparent"
+    "Title" "Author"
+    "Theorem" "Lemma" "Proof" "Qed"
+    "Fact" "Example" "Remark" "Corollary" "Proposition" "Property" "Conjecture"
+;    "if" "then" "else" "in" ; these should be as term highlights
+    "admit" "Admitted"
+    "rewrite" "prove" "assume" "let"
+    "apply" "claim" "exact"
+    "symmetry" "reflexivity" "distinct" "transitivity" "f_equal"
+    "witness" "aby")
   "Additional keywords to highlight in mg proof mode.")
 
 ;; (defvar mg-proof-font-lock-keywords
